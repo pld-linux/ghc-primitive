@@ -96,6 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc LICENSE
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/HSprimitive-%{version}.o
