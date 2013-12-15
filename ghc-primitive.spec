@@ -15,9 +15,20 @@ Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{v
 # Source0-md5:	33090fc61ce0194cb5a595f53bd5c064
 URL:		http://hackage.haskell.org/package/primitive
 BuildRequires:	ghc >= 6.12.3
-%{?with_prof:BuildRequires:	ghc-prof >= 6.12.3}
+BuildRequires:	ghc-base >= 4
+BuildRequires:	ghc-base < 5
+BuildRequires:	ghc-ghc-prim
+%if %{with prof}
+BuildRequires:	ghc-prof >= 6.12.3
+BuildRequires:	ghc-base-prof >= 4
+BuildRequires:	ghc-base-prof < 5
+BuildRequires:	ghc-ghc-prim-prof
+%endif
 BuildRequires:	rpmbuild(macros) >= 1.608
 %requires_eq	ghc
+Requires:	ghc-base >= 4
+Requires:	ghc-base < 5
+Requires:	ghc-ghc-prim
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
@@ -37,6 +48,9 @@ Summary:	Profiling %{pkgname} library for GHC
 Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	ghc-base-prof >= 4
+Requires:	ghc-base-prof < 5
+Requires:	ghc-ghc-prim-prof
 
 %description prof
 Profiling %{pkgname} library for GHC. Should be installed when
