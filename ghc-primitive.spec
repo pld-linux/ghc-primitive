@@ -6,28 +6,25 @@
 Summary:	Primitive memory-related operations
 Summary(pl.UTF-8):	Podstawowe operacje związane z pamięcią
 Name:		ghc-%{pkgname}
-Version:	0.5.1.0
+Version:	0.7.0.1
 Release:	1
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/primitive
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	33090fc61ce0194cb5a595f53bd5c064
+# Source0-md5:	5d8cdb607957daf765240201002ff003
 URL:		http://hackage.haskell.org/package/primitive
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-base >= 4
-BuildRequires:	ghc-base < 5
 BuildRequires:	ghc-ghc-prim
 %if %{with prof}
 BuildRequires:	ghc-prof >= 6.12.3
 BuildRequires:	ghc-base-prof >= 4
-BuildRequires:	ghc-base-prof < 5
 BuildRequires:	ghc-ghc-prim-prof
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
 %requires_eq	ghc
 Requires:	ghc-base >= 4
-Requires:	ghc-base < 5
 Requires:	ghc-ghc-prim
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -49,7 +46,6 @@ Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ghc-base-prof >= 4
-Requires:	ghc-base-prof < 5
 Requires:	ghc-ghc-prim-prof
 
 %description prof
@@ -113,23 +109,28 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/HSprimitive-%{version}.o
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSprimitive-%{version}.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSprimitive-%{version}-*.so
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSprimitive-%{version}-*.a
+%exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSprimitive-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad/Primitive.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad/Primitive.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive/Internal
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive/Internal/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive/Internal/*.dyn_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/include
 
 %if %{with prof}
 %files prof
 %defattr(644,root,root,755)
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSprimitive-%{version}_p.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSprimitive-%{version}-*_p.a
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Control/Monad/Primitive.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Primitive/*.p_hi
