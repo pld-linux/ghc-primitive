@@ -7,7 +7,7 @@ Summary:	Primitive memory-related operations
 Summary(pl.UTF-8):	Podstawowe operacje związane z pamięcią
 Name:		ghc-%{pkgname}
 Version:	0.7.0.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/primitive
